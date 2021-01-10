@@ -42,14 +42,19 @@ export default new Vuex.Store({
       program: 'Mobile',
       isApproved: false
     },
-  ],
+   ],
 
-  admin: {
-    username : 'admin',
-    password : 'admin123',
-    authenticated : false
-  }
-  
+    admin: {
+      username : 'admin',
+      password : 'admin123',
+      authenticated : false
+    },
+
+    kuota: {
+      frontend: 5,
+      backend: 5,
+      mobile: 5
+    }
   },
   
   mutations:{
@@ -73,7 +78,6 @@ export default new Vuex.Store({
       }
     },
 
-
     loginAdmin(state, payload){
       state.admin = payload
     },
@@ -92,13 +96,63 @@ export default new Vuex.Store({
       store.commit('changeStat', payload)
     },
 
-
     login(store, payload) {
      store.commit('loginAdmin', payload)
     }
   },
-  getters:{
+  getters: {
+    //Get data frontend, backend, mobile
+    getFrontend(state){
+      return state.user.filter(i => i.program === 'Frontend')
+    },
+    getBackend(state){
+      return state.user.filter(i => i.program === 'Backend')
+    },
+    getMobile(state){
+      return state.user.filter(i => i.program === 'Mobile')
+    },
+
+
+    //Get Pending
+    getPendingFrontend(state, getters){
+      return getters.getFrontend.filter(i => i.isApproved === false)
+    },
+
+    getPendingBackend(state, getters){
+      return getters.getBackend.filter(i => i.isApproved === false)
+    },
+
+    getPendingMobile(state, getters){
+      return getters.getMobile.filter(i => i.isApproved === false)
+    },
+    
+    //Get Approved
+    getApprovedFrontend(state, getters){
+      return getters.getFrontend.filter(i => i.isApproved === true)
+    },
+
+    getApprovedBackend(state, getters){
+      return getters.getBackend.filter(i => i.isApproved === true)
+    },
+
+    getApprovedMobile(state, getters){
+      return getters.getMobile.filter(i => i.isApproved === true)
+    },
+
+    //Get kuota frontend, backend, mobile
+    getKuotaFrontend(state, getters){
+      return state.kuota.frontend - getters.getApprovedFrontend.length
+    },
+
+    getKuotaBackend(state, getters){
+      return state.kuota.backend - getters.getApprovedBackend.length
+    },
+
+    getKuotaMobile(state, getters){
+      return state.kuota.mobile - getters.getApprovedMobile.length
+    },
   },
-  modules: {
+
+  modules: {  
   }
 })

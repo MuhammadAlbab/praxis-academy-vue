@@ -1,50 +1,51 @@
 <template>
-        <v-container>
-            <v-row class="justify-center">
-                <v-col class="col-sm-4 col-md-4 col-lg-4">
-                    <v-card tile elevation="1" class="mt-10">
-                        <v-card-title class="justify-center"> 
-                            <h3>Login Admin</h3>
-                        </v-card-title>
-                        <v-form>
+    <v-container>
+        <v-row class="justify-center">
+                <v-card 
+                id="login-card">
+                    <v-card-title class="justify-center"> 
+                        <h3>Login Admin</h3>
+                    </v-card-title>
+                    <v-form>
+                        <v-alert 
+                            color="error" 
+                            type="error" 
+                            :value="error.username"
+                            transition="slide-y-transition">
+                            Username incorrect!
+                        </v-alert>
                             <v-alert 
-                                color="error" 
-                                type="error" 
-                                :value="error.username"
-                                transition="slide-y-transition">
-                                Username incorrect!
-                            </v-alert>
-                             <v-alert 
-                                color="error" 
-                                type="error" 
-                                :value="error.password"
-                                transition="slide-y-transition">
-                                Password incorrect!
-                            </v-alert>
-                             <v-alert 
-                                color="error" 
-                                type="error" 
-                                :value="error.userpass"
-                                transition="slide-y-transition">
-                                Username and password incorrect!
-                            </v-alert>
-                            <v-card-text>
-                                <v-text-field 
-                                outlined
-                                label="Username" prepend-inner-icon="mdi-account-circle" v-model="admin.username"/>
-                                <v-text-field 
-                                outlined
-                                label="Password" prepend-inner-icon="mdi-lock"
-                                :type="showPassword ? 'text' : 'password'" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" @click:append="handleClick" v-model="admin.password"/>
-                            </v-card-text>
-                            <v-card-actions class="justify-center">
-                                <v-btn color="success" @click="handleSubmit">Submit</v-btn>
-                            </v-card-actions>
-                        </v-form>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-container>
+                            color="error" 
+                            type="error" 
+                            :value="error.password"
+                            transition="slide-y-transition">
+                            Password incorrect!
+                        </v-alert>
+                            <v-alert 
+                            color="error" 
+                            type="error" 
+                            :value="error.userpass"
+                            transition="slide-y-transition">
+                            Username and password incorrect!
+                        </v-alert>
+                        <v-card-text>
+                            <v-text-field 
+                            outlined
+                            label="Username" prepend-inner-icon="mdi-account-circle" v-model="admin.username"/>
+                            <v-text-field 
+                            outlined
+                            label="Password" prepend-inner-icon="mdi-lock"
+                            :type="showPassword ? 'text' : 'password'" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" @click:append="handleClick" v-model="admin.password"/>
+                        </v-card-text>
+                        <v-card-actions class="justify-center">
+                            <v-btn
+                            text
+                            @click="handleSubmit">Submit</v-btn>
+                        </v-card-actions>
+                    </v-form>
+                </v-card>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -84,3 +85,10 @@ export default {
         }
     }
 </script>
+
+<style scoped>
+    #login-card{
+        margin: 50px;
+        min-width: 400px;
+    }
+</style>

@@ -9,10 +9,24 @@
             <v-alert 
                 color="error" 
                 type="error" 
-                :value="alert"
+                :value="alertFrontend"
                 transition="slide-y-transition">
-                Maaf slot pendaftaran penuh, Mohon tunggu batch selanjutnya!
+                Maaf slot pendaftaran 'FRONTEND' sudah penuh, Mohon tunggu batch selanjutnya!
             </v-alert>
+            <v-alert 
+                color="error" 
+                type="error" 
+                :value="alertBackend"
+                transition="slide-y-transition">
+                Maaf slot pendaftaran 'Backend' sudah penuh, Mohon tunggu batch selanjutnya!
+            </v-alert>
+            <v-alert 
+                color="error" 
+                type="error" 
+                :value="alertMobile"
+                transition="slide-y-transition">
+                Maaf slot pendaftaran 'Mobile'sudah penuh, Mohon tunggu batch selanjutnya!
+            </v-alert>                        
             <v-card-text>
                 <v-text-field 
                 prepend-inner-icon="mdi-account-edit"
@@ -82,42 +96,64 @@ export default {
                 v => !!v || 'Select your program!',
             ],
             programKu: ['Frontend', 'Backend', 'Mobile'],
-            alert: false
+            alertFrontend: false,
+            alertBackend: false,
+            alertMobile: false
         }
     },
     methods: {
         handleSubmit(){
             if(this.$refs.form.validate()){
-                if (this.$store.state.user.length >= 8){
-                    this.alert = true
-                }else{
-                    let user = {
+                let user = {
                     name: this.name,
                     address: this.address,
                     program: this.program,
                     isApproved: false
-                    }
-                    this.$store.dispatch('addedUser', user)
-                    alert('Data berhasil ditambahkan!')
-                    if (user.program == 'Frontend') {
-                        this.$router.push({name: 'FrontEnd'})
-                    }else if(user.program == 'Backend'){
-                        this.$router.push({name: 'BackEnd'})
-                    }else{
-                        this.$router.push({name: 'Mobile'})
-                    }
-                    this.$emit('changeDial', !this.dialog)
                 }
-                
+                    if (user.program === 'Frontend') {
+                        if (this.$store.getters.getApprovedFrontend.length >= this.$store.getters.getKuotaFrontend){
+                            this.alertFrontend = true
+                        }else{
+                            alert('Data berhasil ditambahkan!')
+                            this.$store.dispatch('addedUser', user)
+                            this.$emit('changeDial', !this.dialog)
+                            this.$router.push({name: 'FrontEnd'})
+                        }
+                    }else if(user.program ==='Backend'){
+                        if (this.$store.getters.getApprovedBackend.length >= this.$store.getters.getKuotaBackend){
+                            this.alertBackend = true
+                        }else{
+                            alert('Data berhasil ditambahkan!')
+                            this.$store.dispatch('addedUser', user)
+                            this.$emit('changeDial', !this.dialog)
+                            this.$router.push({name: 'BackEnd'})
+                        }
+                    }else if(user.program === 'Mobile'){
+                        if (this.$store.getters.getApprovedMobile.length >= this.$store.getters.getKuotaMobile){
+                            this.alertMobile = true
+                        }else{
+                            alert('Data berhasil ditambahkan!')
+                            this.$store.dispatch('addedUser', user)
+                            this.$emit('changeDial', !this.dialog)
+                            this.$router.push({name: 'Mobile'})
+                        }
+                    }
+                    
             }
         },
         resetSubmit(){
+            this.alertFrontend = false
+            this.alertBackend = false
+            this.alertMobile = false
             this.$refs.form.reset()
-        }
+        },
     },
     watch: {
         dialog: function(val){
             if (val){
+                this.alertFrontend = false
+                this.alertBackend = false
+                this.alertMobile = false
                 this.$refs.form.reset()
             }
         }

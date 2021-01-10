@@ -107,7 +107,7 @@ export default {
     users() {
       return this.$store.state.user
     },
-    
+
     frontendTotal(){
       return this.$store.state.user.filter((e) => {
         return e.program === 'Frontend'
@@ -175,9 +175,9 @@ export default {
     }
 
     .head-card{
-        width: 450px;
+        width: 410px;
         height: 150px;
-        margin: 20px;
+        margin: 20px 0px;
     }
 
     .txt-head{

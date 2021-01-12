@@ -67,23 +67,27 @@ export default {
             this.showPassword = !this.showPassword
         },
         handleSubmit() {
-                const adminUsername = this.$store.state.admin.username
-                const adminPassword = this.$store.state.admin.password
-                if(this.admin.username !== adminUsername && this.admin.password !== adminPassword) {
-                    this.error.userpass = true
-                } else if(this.admin.username !== adminUsername) {
-                    this.error.username = true
-                } else if(this.admin.password !== adminPassword) {
-                    this.error.password = true
-                } else {
-                    this.$store.commit("setAuthentication", true)
-                    this.$store.dispatch("login", this.admin)
-                    alert('Login success!')
-                    this.$router.push('/admin')
-                }
+            const adminUsername = this.$store.state.admin.username
+            const adminPassword = this.$store.state.admin.password
+            if(this.admin.username !== adminUsername && this.admin.password !== adminPassword) {
+                this.error.userpass = true
+            } else if(this.admin.username !== adminUsername) {
+                this.error.username = true
+            } else if(this.admin.password !== adminPassword) {
+                this.error.password = true
+            } else {
+                let login = true
+                localStorage.setItem('Authentication', login)
+                this.$store.commit("setAuthentication", login)
+                this.$store.dispatch("login", this.admin)
+                alert('Login success!')
+                this.$emit('changeDialTwo', !this.dialogTwo)
+                // location.reload()
             }
+        this.$router.push('/admin')
         }
     }
+}
 </script>
 
 <style scoped>

@@ -77,11 +77,10 @@ export default new Vuex.Store({
         }
       }
     },
-
     loginAdmin(state, payload){
       state.admin = payload
     },
-    setAuthentication(state, payload) {
+    getAuthentication(state, payload) {
       state.authenticated = payload
     }
   },
@@ -95,9 +94,11 @@ export default new Vuex.Store({
     changedStat(store, payload){
       store.commit('changeStat', payload)
     },
-
-    login(store, payload) {
-     store.commit('loginAdmin', payload)
+    loggedAdmin(store, payload) {
+      store.commit('loginAdmin', payload)
+    },
+    getAuthenticated(store, payload) {
+      store.commit('getAuthentication', payload)
     }
   },
   getters: {

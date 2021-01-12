@@ -47,7 +47,7 @@
 <script>
 export default {
     name: 'LgDial',
-    props: ['dialogTwo'],
+    props: ['dialogTwo', 'Authentication'],
     data: () => ({
         admin: {
             username : '',
@@ -74,10 +74,12 @@ export default {
             } else if(this.admin.password !== adminPassword) {
                 this.error.password = true
             } else {
-                this.$store.commit("setAuthentication", true)
-                this.$store.dispatch("login", this.admin)
+                this.$store.dispatch("loggedAdmin", this.admin)
+                this.$store.dispatch("getAuthenticated", true)
+                localStorage.setItem('Authentication', true)
+                localStorage.getItem('Authentication');
+                this.$emit('changeDialTwo', !this.dialogTwo, !this.Authentication)
                 alert('Login success!')
-                this.$emit('changeDialTwo', !this.dialogTwo)
                 this.$router.push('/admin')
             }
         }

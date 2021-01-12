@@ -11,7 +11,7 @@
                 type="error" 
                 :value="alertFrontend"
                 transition="slide-y-transition">
-                Maaf slot pendaftaran 'FRONTEND' sudah penuh, Mohon tunggu batch selanjutnya!
+                Maaf slot pendaftaran 'Frontend' sudah penuh, Mohon tunggu batch selanjutnya!
             </v-alert>
             <v-alert 
                 color="error" 

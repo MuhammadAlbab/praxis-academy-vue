@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '../store'
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,25 +40,24 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
   },
-
-  {
-    path: '/login',
-    name: 'Login Admin',
-    component: () => import(/* webpackChunkName: "admin" */ '../views/Admin/LoginPage.vue')
-  },
+  // {
+  //   path: '/login',
+  //   name: 'Login Admin',
+  //   component: () => import(/* webpackChunkName: "admin" */ '../views/Admin/LoginPage.vue')
+  // },
   {
     path: '/admin',
     name: 'Admin',
-    meta: {login : true},
     component: () => import(/* webpackChunkName: "admin" */ '../views/Admin/Admin.vue'),
     beforeEnter: (to, from, next) => {
-     if(store.state.admin.authenticated == false) {
-       next('/login')
-      // alert('This page is secured!')
-     } else {
-       next()
-     }
+    let Authentication = localStorage.getItem('Authentication')
+    if(Authentication == false || Authentication == undefined) {
+      next('/')
+    // alert('This page is secured!')
+    }else{
+      next()
     }
+  }
   },
 ]
 

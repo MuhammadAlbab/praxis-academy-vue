@@ -37,10 +37,10 @@
           shaped>
             <v-card-title>{{data.title}}</v-card-title>
             <v-card-subtitle>
-              <p>Total Pendaftar: {{data.pendaftar}}</p>
-              <p>Pending: {{data.pending}}</p>
-              <p>Approved {{data.approved}}</p>
-              <p>Sisa Kuota: {{data.sisaKuota}}</p>
+              <p class="info-pendaftar">Total Pendaftar: {{data.pendaftar}}</p>
+              <p class="info-pendaftar">Pending: {{data.pending}}</p>
+              <p class="info-pendaftar">Approved {{data.approved}}</p>
+              <p class="info-pendaftar">Sisa Kuota: {{data.sisaKuota}}</p>
             </v-card-subtitle>
           </v-card>
         </v-col>
@@ -168,7 +168,7 @@ export default {
   .txt-welcome {
     text-align: center;
     margin-bottom: 20px;
-    color: gray;
+    color: rgb(56, 51, 51);
   }
   .txt-con {
     font-size: medium;
@@ -178,6 +178,10 @@ export default {
   .head {
     font-size: large;
     text-align: start;
+  }
+
+  .info-pendaftar{
+    margin: 0;
   }
 
 </style>

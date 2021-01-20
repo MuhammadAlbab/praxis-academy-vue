@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -7,41 +8,41 @@ export default new Vuex.Store({
   state: {
     user: [
       {
-      name: 'Aku Anak Frontend',
-      address: 'Jl. Kaliurang',
-      program: 'Frontend',
-      isApproved: true
-    },
-    {
-      name: 'Aku Anak Frontend 2',
-      address: 'Jl. Tamsis',
-      program: 'Frontend',
-      isApproved: false
-    },
-    {
-      name: 'Aku Anak Backend',
-      address: 'Jl. Cinta',
-      program: 'Backend',
-      isApproved: true
-    },
-    {
-      name: 'Aku Anak Backend 2',
-      address: 'Jl. Sayang',
-      program: 'Backend',
-      isApproved: false
-    },
-    {
-      name: 'Aku Anak Mobile',
-      address: 'Jl. Kenangan',
-      program: 'Mobile',
-      isApproved: true
-    },
-    {
-      name: 'Aku Anak Mobile 2',
-      address: 'Jl. Sesat',
-      program: 'Mobile',
-      isApproved: false
-    },
+        name: 'Aku Anak Frontend',
+        address: 'Jl. Kaliurang',
+        program: 'Frontend',
+        isApproved: true
+      },
+      {
+        name: 'Aku Anak Frontend 2',
+        address: 'Jl. Tamsis',
+        program: 'Frontend',
+        isApproved: false
+      },
+      {
+        name: 'Aku Anak Backend',
+        address: 'Jl. Cinta',
+        program: 'Backend',
+        isApproved: true
+      },
+      {
+        name: 'Aku Anak Backend 2',
+        address: 'Jl. Sayang',
+        program: 'Backend',
+        isApproved: false
+      },
+      {
+        name: 'Aku Anak Mobile',
+        address: 'Jl. Kenangan',
+        program: 'Mobile',
+        isApproved: true
+      },
+      {
+        name: 'Aku Anak Mobile 2',
+        address: 'Jl. Sesat',
+        program: 'Mobile',
+        isApproved: false
+      },
    ],
 
     admin: {
@@ -54,7 +55,8 @@ export default new Vuex.Store({
       frontend: 5,
       backend: 5,
       mobile: 5
-    }
+    },
+    materi: []
   },
   
   mutations:{
@@ -82,6 +84,9 @@ export default new Vuex.Store({
     },
     getAuthentication(state, payload) {
       state.authenticated = payload
+    },
+    getMateri(state, payload){
+      state.materi = payload
     }
   },
   actions:{
@@ -99,6 +104,10 @@ export default new Vuex.Store({
     },
     getAuthenticated(store, payload) {
       store.commit('getAuthentication', payload)
+    },
+    gotMateri(store, payload){
+      
+      store.commit('getMateri', payload)
     }
   },
   getters: {

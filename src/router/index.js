@@ -53,7 +53,6 @@ const routes = [
     let Authentication = localStorage.getItem('Authentication')
     if(Authentication == false || Authentication == undefined) {
       next('/')
-    // alert('This page is secured!')
     }else{
       next()
     }

@@ -56,18 +56,13 @@ export default {
 </script>
 
 <style>
-
   #myFooter{
     padding: 10px;
   }
-
   #first-row{
     padding: 5px;
   }
-
   #first-col{
     text-align: justify;
   }
-
-
 </style>

@@ -160,10 +160,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
-.btn-top {
-    margin-right: 30px;
-}
-
+<style>
+    .btn-top {
+        margin-right: 30px;
+    }
 </style>
